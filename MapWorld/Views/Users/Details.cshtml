@@ -1,0 +1,26 @@
+﻿@model MapWorld.Models.ApplicationUser
+
+<div class="container dark-grey-text mt-5">
+    <div class="row wow fadeIn">
+        <div class="col-md-6 mb-4">
+            <img src="@Model.PictureUrl" class="img-fluid imageBorder" alt="">
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="p-4">
+
+                <p class="lead font-weight-bold">@Model.FirstName @Model.LastName</p>
+                <p>
+                    @Model.FirstName @Model.LastName works at the @Model.Store.StoreName located on @Model.Store.Location
+                </p>
+                @if ((int)TempData["StoreId"] != 0)
+                {
+                    <a href="@Url.Action("Details", "Stores", new { id =  (int)TempData["StoreId"]})">Back to Store</a>
+                }
+                @if (User.IsInRole("Manager"))
+                {
+                    <a href="@Url.Action("Index", "Users")">Back to List</a>
+                }
+            </div>
+        </div>
+    </div>
+    </div>

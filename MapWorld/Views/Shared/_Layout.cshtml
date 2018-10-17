@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Map World</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/mdb.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <div class="container">
+            <a class="navbar-brand waves-effect" href="@Url.Action("Index", "Home")">
+                <strong class="blue-text" style="font-family: cursive">Map World</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="@Url.Action("Index", "Home")">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="@Url.Action("Store", "Home")">Maps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="@Url.Action("Index", "Stores")">Stores</a>
+                    </li>
+                    @if (User.IsInRole("Employee") || User.IsInRole("Manager"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="@Url.Action("Index", "Users")">Edit Employees</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav nav-flex-icons">
+                    @Html.Action("_LoginPartial", "Account")
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br />
+    <br />
+    <img src="~/img/MapHeader.jpg" class="headerImage" />
+    <br />
+    <br />
+    @RenderBody()
+
+    <div class="footer-copyright py-3 text-center">
+        ©Map World Inc.
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/js/mdb.min.js"></script>
+    <script type="text/javascript">new WOW().init();</script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
+</body>
+</html>

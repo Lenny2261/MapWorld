@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MapWorld.Models.Stores>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Store Name
+                </th>
+                <th>
+                    Location
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.PictureUrl" class="listStorePicture imageBorder"/>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Store Details", "Details", new { id = item.Id})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready( function () {
+            $('.table').DataTable();
+        } );
+    </script>
+
+}

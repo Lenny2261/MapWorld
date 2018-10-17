@@ -1,0 +1,71 @@
+﻿@model MapWorld.Models.Stores
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+        <div class="row wow fadeIn">
+            <div class="col-md-6 mb-4">
+                <h3 class="lead font-weight-bold">@Model.StoreName</h3>
+                <br />
+                <img src="@Model.PictureUrl" class="img-fluid imageBorder" alt="">
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="p-4">
+                        <div id="map" style="height: 310px; width:100%; margin-top: 30px;"></div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-center wow fadeIn">
+            <div class="col-md-6 text-center">
+                <h4 class="my-4 h4">Employees at This Store</h4>
+            </div>
+        </div>
+        <div class="row wow fadeIn">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ApplicationUsers)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.PictureUrl" class="listEmpPicture imageBorder" />
+                            </td>
+                            <td>
+                                @item.FirstName @item.LastName
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "Users", new { id = item.Id, storeId = Model.Id })">Employee Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdJvTiAECnNA7XS-Pwtdmk_lVMMTlsmOk&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            var latlong = { lat: @TempData["Lat"], lng: @TempData["Lng"] };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: latlong
+            });
+
+            var marker = new google.maps.Marker({
+                position: latlong,
+                map: map,
+                title: 'Location: @Model.Location'
+            });
+        }
+    </script>
+}
